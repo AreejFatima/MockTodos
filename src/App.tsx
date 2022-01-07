@@ -4,10 +4,15 @@ import './App.css';
 import AddTodo from './components/AddTodo';
 import Todo from './components/Todo';
 
-
 if (process.env.NODE_ENV === 'development') {
   const { worker } = require('./mocks/browser');
   worker.start();
+}
+
+export interface todoType{
+  id:string,
+  isDone:boolean,
+  text:string
 }
 
 function App() {
@@ -15,14 +20,13 @@ function App() {
 
   if (isLoading) return <div>Loading....</div>;
 
- 
   return (
     <div className='App'>
       <header>
         <h1>Todos</h1>
       </header>
       <AddTodo />
-      {todos.map((todo: any) => (
+      {todos.map((todo: todoType) => (
         <Todo
           key={todo.id}
           text={todo.text}

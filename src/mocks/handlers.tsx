@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import { todoType } from '../App';
 import { getFromDB, saveToDB, updateDB } from './frontendDB';
 
 // export let todoList = [
@@ -19,7 +20,7 @@ import { getFromDB, saveToDB, updateDB } from './frontendDB';
 //   },
 // ];
 
-let todoList=getFromDB()
+let todoList = getFromDB();
 
 export const handlers = [
   rest.get('/todos', (req, res, ctx) => {
@@ -28,26 +29,24 @@ export const handlers = [
 
   rest.delete(`/todos/:id`, (req, res, ctx) => {
     const { id } = req.params;
-    todoList = todoList.filter((todo:any) => todo.id !== id);
+    todoList = todoList.filter((todo: todoType) => todo.id !== id);
     updateDB(todoList);
     return res(ctx.delay(200), ctx.status(204));
   }),
 
   rest.patch(`/todos/:id`, (req, res, ctx) => {
     const { id } = req.params;
-    todoList=todoList.map((todo:any) => {
+    todoList = todoList.map((todo: todoType) => {
       if (todo.id === id) {
-        todo.isDone=!todo.isDone
+        todo.isDone = !todo.isDone;
       }
-      return todo
-    
+      return todo;
     });
-    updateDB(todoList)
+    updateDB(todoList);
     return res(ctx.delay(200), ctx.status(200), ctx.json(req.body));
   }),
 
   rest.post('/todos', (req, res, ctx) => {
-    
     const id = todoList.length + 1 || 1;
     const newItem = {
       id: id.toString(),

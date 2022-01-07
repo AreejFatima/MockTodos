@@ -1,5 +1,10 @@
 import { getFromDB } from './mocks/frontendDB';
 
+interface paramType{
+  isDone:boolean,
+  id:string
+}
+
 export async function getTodos() {
   // return fetch('/todos')
   //   .then((response) => {
@@ -9,12 +14,11 @@ export async function getTodos() {
   //     return data;
   //   });
   let todos = getFromDB();
-  
+
   if (todos) return todos;
-  
 }
 
-export async function addTodo(text: any) {
+export async function addTodo(text: string) {
   const response = await fetch(`/todos`, {
     method: 'POST',
     headers: {
@@ -25,7 +29,7 @@ export async function addTodo(text: any) {
   return response.json();
 }
 
-export async function updateTodo({ isDone, id }: any) {
+export async function updateTodo({ isDone, id }: paramType) {
   const response = await fetch(`/todos/${id}`, {
     method: 'PATCH',
     headers: {
@@ -38,7 +42,7 @@ export async function updateTodo({ isDone, id }: any) {
   return response.json();
 }
 
-export async function deleteTodo(id: any) {
+export async function deleteTodo(id: string) {
   const response = await fetch(`/todos/${id}`, {
     method: 'Delete',
   });
