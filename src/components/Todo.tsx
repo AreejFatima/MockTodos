@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
+import { todoType } from '../types/types';
 
 import { updateTodo, deleteTodo } from '../utils'
 
-export default function Todo(props:any) {
+export default function Todo(props:todoType) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(updateTodo, {
