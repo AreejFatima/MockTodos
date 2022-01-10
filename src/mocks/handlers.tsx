@@ -1,24 +1,6 @@
 import { rest } from 'msw';
-import { todoType } from '../App';
+import { todoType } from '../types/types';
 import { getFromDB, saveToDB, updateDB } from './frontendDB';
-
-// export let todoList = [
-//   {
-//     id: '1',
-//     text: 'I am todo 1',
-//     isDone: false,
-//   },
-//   {
-//     id: '2',
-//     text: 'I am todo 2',
-//     isDone: false,
-//   },
-//   {
-//     id: '3',
-//     text: 'I am todo 3',
-//     isDone: false,
-//   },
-// ];
 
 let todoList = getFromDB();
 

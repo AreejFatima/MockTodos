@@ -1,21 +1,19 @@
 import { getFromDB } from './mocks/frontendDB';
+import { paramType } from './types/types';
 
-interface paramType{
-  isDone:boolean,
-  id:string
-}
+
 
 export async function getTodos() {
-  // return fetch('/todos')
-  //   .then((response) => {
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     return data;
-  //   });
-  let todos = getFromDB();
+  return fetch('/todos')
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data;
+    });
+  // let todos = getFromDB();
 
-  if (todos) return todos;
+  // if (todos) return todos;
 }
 
 export async function addTodo(text: string) {

@@ -3,20 +3,18 @@ import { getTodos } from './utils';
 import './App.css';
 import AddTodo from './components/AddTodo';
 import Todo from './components/Todo';
+import { todoType } from './types/types';
+import { useEffect } from 'react';
 
 if (process.env.NODE_ENV === 'development') {
   const { worker } = require('./mocks/browser');
   worker.start();
 }
 
-export interface todoType{
-  id:string,
-  isDone:boolean,
-  text:string
-}
-
 function App() {
   const { data: todos, isLoading } = useQuery('todos', getTodos);
+
+
 
   if (isLoading) return <div>Loading....</div>;
 
